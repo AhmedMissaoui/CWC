@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:composition template="/template.xhtml">
+<ui:define name="contenu">
+ <h:form >
+	<p:dataTable  value="#{conferenceBean.conferences}"  var="conference"  >
+	<f:facet name="header">List of Conferences</f:facet>
+			<p:column style="width:16px">
+				<p:rowToggler />
+				</p:column>
+	 <p:column headerText="Date">
+				<h:outputLabel value="#{conference.date}" />
+				</p:column>
+    <p:column headerText="Location">
+				<h:outputLabel value="#{conference.location}" />
+			</p:column>
+	<p:column headerText="Description">
+				<h:outputLabel value="#{conference.description}" />
+			</p:column>
+	<p:column headerText="Speaker">
+				<h:outputLabel value="#{conference.speaker}" />
+			</p:column>
+			<p:column headerText="Subject">
+				<h:outputLabel value="#{conference.subject}" />
+			</p:column>
+		<p:column>
+    <h:commandButton value="update" >
+    <f:setPropertyActionListener value="#{conference}" target="#{conferenceBean.c}"></f:setPropertyActionListener>
+    <f:setPropertyActionListener value="#{true}" target="#{conferenceBean.test}"></f:setPropertyActionListener>
+   </h:commandButton>
+    </p:column>
+   <p:column>
+   <h:commandButton action="#{conferenceBean.delete(conference)}" value="delete" />
+    </p:column>
+	</p:dataTable>
+	<h:commandButton action="#{conferenceBean.inisialiser()}" value="Add" />
+	</h:form>
+
+<h:form rendered="#{conferenceBean.test}">
+	<p:panelGrid columns="2">
+		
+		<h:outputText value="Date:" />
+		<p:inputText id="date" value="#{conferenceBean.c.date}"
+			converterMessage="date invalide">
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+		</p:inputText>
+		<h:outputText value="Location:" />
+		<p:inputText value="#{conferenceBean.c.location}" />
+		<h:outputText value="Description:" />
+		<p:inputText value="#{conferenceBean.c.description}" />  
+		<h:outputText value="Speaker:" />
+		<p:inputText value="#{conferenceBean.c.speaker}" />  
+		<h:outputText value="Subject:" />
+		<p:inputText value="#{conferenceBean.c.subject}" />  
+		
+		<h:commandButton action="#{conferenceBean.updateTS()}" value="validate" /> 
+		<p:message for="date"/>
+		
+	</p:panelGrid>
+</h:form>
+
+</ui:define>
+</ui:composition>
+	
+</html>

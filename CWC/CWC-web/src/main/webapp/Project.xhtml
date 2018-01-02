@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml">
+<ui:define name="contenu">
+	<h:form >
+	<p:dataTable  value="#{projectBean.t_Projects}"  var="project" >
+	
+	
+	
+	<f:facet name="header">List of Projects</f:facet>
+			<p:column style="width:16px">
+				<p:rowToggler />
+			</p:column>
+			
+	<p:column headerText="Deadline">
+				<h:outputLabel value="#{project.deadline}" />
+			</p:column>
+			
+			
+			<p:column headerText="Type">
+				<h:outputLabel value="#{project.type}" />
+			</p:column>
+	
+	
+	<p:column>
+    <h:commandButton value="update"  >
+    <f:setPropertyActionListener value="#{project}" target="#{projectBean.p}"></f:setPropertyActionListener>
+    <f:setPropertyActionListener value="#{true}" target="#{projectBean.test}"></f:setPropertyActionListener>
+   </h:commandButton>
+    </p:column>
+    
+   <p:column>
+   <h:commandButton action="#{projectBean.deletePR(project)}" value="delete" />
+    </p:column>
+	</p:dataTable>
+	<h:commandButton action="#{projectBean.inisialiser()}" value="Add"  />
+	</h:form>
+
+
+<h:form  rendered="#{projectBean.test}">
+	     <p:panelGrid columns="2" >
+	     <h:outputText value="Date:" />
+		 <p:inputText id="date" value="#{projectBean.p.deadline}"
+			converterMessage="date invalide">
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+		</p:inputText>
+          
+	 
+	      
+    <h:outputText value="TYPE:"/>
+    <p:selectOneMenu  value="#{projectBean.p.type}">
+    <f:selectItem  itemValue="Individual project" itemLabel="Individual_project"/>
+    <f:selectItem  itemValue="Group project" itemLabel="Group_project"/>
+   </p:selectOneMenu>
+	
+    <h:commandButton action="#{projectBean.updatePR()}" value="valider" />
+	<p:message for="date"/>
+	
+     </p:panelGrid>
+	</h:form>
+</ui:define>
+</ui:composition>
+</html>

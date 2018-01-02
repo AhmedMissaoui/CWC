@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+<ui:define name="contenu">
+	<h:form >
+	<p:dataTable  value="#{employeeSessionBean.emp_sessions}"  var="emp_sessions"  >
+	<f:facet name="header">List of Employeesession</f:facet>
+			<p:column style="width:16px">
+				<p:rowToggler />
+				</p:column>
+	 <p:column headerText="Number of Participants">
+				<h:outputLabel value="#{emp_sessions.numberParticipants}" />
+				</p:column>
+     <p:column headerText="StartDate">
+				<h:outputLabel value="#{emp_sessions.startDate}" />
+				</p:column>
+	 <p:column headerText="EndDate">
+				<h:outputLabel value="#{emp_sessions.endDate}" />
+				</p:column>
+	
+ 	</p:dataTable>
+	<h:commandButton action="#{employeeSessionBean.inisialiser()}" value="Add" />
+	</h:form>
+
+
+	<h:form  rendered="#{employeeSessionBean.test}">
+	<p:panelGrid columns="2">
+	
+	<h:outputText value="Number_Participants:" />
+	<p:inputText value="#{employeeSessionBean.ES.numberParticipants}" />
+	
+	<h:outputText value="StartDate:" />
+		<p:inputText id="d" value="#{employeeSessionBean.ES.startDate}"
+			converterMessage="date invalide">
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+			</p:inputText>
+			<h:outputText value="EndDate:" />
+		<p:inputText id="date" value="#{employeeSessionBean.ES.endDate}"
+			converterMessage="date invalide">
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+			</p:inputText>
+	<h:commandButton action="#{employeeSessionBean.AddES()}" value="Add" />
+	<p:message for="date"/>
+	<p:message for="d"/>
+     </p:panelGrid>
+	</h:form>
+	</ui:define>
+	</ui:composition>
+</html>
