@@ -25,10 +25,14 @@ Under the "Deployed Ressources" , you can fin different UI Files written in XHTM
 4-If last step is executed rightfully , Run the web project By a "Run on server" option On the Index.xhtml File or a "clean install" command in "Mavel build" option.
 
 # Tools and requirements
-Tools :
 Jboss Developer Studio
+
 EJB : Entreprise Java Bean 3
+
 JDK8
+
 Wildfly 9.x or 8.x (Application Server)
+
 JSF : Java server faces
+
 JPA/Hibernate
