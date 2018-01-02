@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+<ui:define name="contenu">
+ <h:form >
+	<p:dataTable  value="#{workshopBean.workshops}"  var="workshop"  >
+	<f:facet name="header">List of Workshops</f:facet>
+			<p:column style="width:16px">
+				<p:rowToggler />
+			</p:column>
+	        <p:column headerText="Date">
+				<h:outputLabel value="#{workshop.date}" />
+				</p:column>
+	<p:column headerText="Location">
+				<h:outputLabel value="#{workshop.location}" />
+			</p:column>
+	<p:column headerText="Duration">
+				<h:outputLabel value="#{workshop.duration}" />
+			</p:column>
+	<p:column headerText="Number of participants">
+				<h:outputLabel value="#{workshop.number_Participants}" />
+			</p:column>
+	<p:column headerText="Theme">
+				<h:outputLabel value="#{workshop.theme}" />
+			</p:column>
+	
+	<p:column>
+    <h:commandButton value="update" >
+    <f:setPropertyActionListener value="#{workshop}" target="#{workshopBean.w}"></f:setPropertyActionListener>
+    <f:setPropertyActionListener value="#{true}" target="#{workshopBean.test}"></f:setPropertyActionListener>
+   </h:commandButton>
+    </p:column>
+   <p:column>
+   <h:commandButton action="#{workshopBean.delete(workshop)}" value="delete" />
+    </p:column>
+	</p:dataTable>
+	<h:commandButton action="#{workshopBean.inisialiser()}" value="Add" />
+	</h:form>
+	<h:form  rendered="#{workshopBean.test}">
+	<p:panelGrid columns="2" >
+	
+	<h:outputText value="Date:" />
+	<p:inputText  id="date"  value="#{workshopBean.w.date}" 
+	      converterMessage="date invalide">
+	      <f:convertDateTime pattern="dd/MM/yyyy" />
+	      </p:inputText>
+    <h:outputText value="Location:" />
+	<p:inputText value="#{workshopBean.w.location}" />
+	<h:outputText value="Duration:" />
+	<p:inputText value="#{workshopBean.w.duration}" />
+	<h:outputText value="Number of Employees:" />
+	<p:inputText value="#{workshopBean.w.number_Participants}" />
+	<h:outputText value="Theme:" />
+	<p:inputText value="#{workshopBean.w.theme}" />
+    <h:commandButton action="#{workshopBean.updateworkshop()}" value="Validate" />
+	<p:message for="date"/>
+     </p:panelGrid>
+	</h:form>
+	</ui:define>
+	</ui:composition>
+</html>

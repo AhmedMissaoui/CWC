@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml">
+<ui:define name="contenu">
+	<p:dataTable value="#{taskbean.employees}" var="employee">
+		<f:facet name="header">
+			List des employees
+		</f:facet>
+
+		<p:column style="width:16px">
+			<p:rowToggler />
+		</p:column>
+
+		<p:column headerText="CIN">
+			<h:outputLabel value="#{employee.CIN}" />
+		</p:column>
+
+		<p:column headerText="First Name">
+			<h:outputLabel value="#{employee.first_name}" />
+		</p:column>
+
+		<p:column headerText="Last Name">
+			<h:outputLabel value="#{employee.last_name}" />
+		</p:column>
+
+		<p:rowExpansion>
+			<p:dataTable value="#{employee.projects}" var="project">
+				<f:facet name="header">
+		            Liste des Projects
+		        </f:facet>
+				<p:column style="width:16px">
+					<p:rowToggler />
+				</p:column>
+
+				<p:column headerText="id project">
+					<h:outputLabel value="#{project.id_project}" />
+				</p:column>
+
+				<p:rowExpansion>
+					<p:dataTable value="#{project.tasks}" var="task">
+						<f:facet name="header">
+				            Liste des taches
+				        </f:facet>
+						<p:column headerText="Task ID">
+							<h:outputLabel value="#{task.id_Task}" />
+						</p:column>
+					</p:dataTable>
+				</p:rowExpansion>
+			</p:dataTable>
+		</p:rowExpansion>
+	</p:dataTable>
+
+</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,41 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	
+
+
+
+<h1>WELCOME</h1>
+ <h:form >
+	<h:dataTable  value="#{planningBean.planings}"  var="plan" border="1" >
+	<h:column>
+	<f:facet name="header">id_Planning </f:facet>
+	#{plan.id_Planing}
+	</h:column>
+    
+	<h:column>
+    <h:commandButton value="update" >
+    <f:setPropertyActionListener value="#{plan}" target="#{planningBean.p}"></f:setPropertyActionListener>
+    <f:setPropertyActionListener value="#{true}" target="#{planningBean.test}"></f:setPropertyActionListener>
+   </h:commandButton>
+    </h:column>
+   <h:column>
+   <h:commandButton action="#{planningBean.deletePlaning(plan)}" value="supprimer" />
+    </h:column>
+	</h:dataTable>
+	<h:commandButton action="#{planningBean.initialiser()}" value="Add" />
+	</h:form>
+<h:form rendered="#{planningBean.test}">
+	<h:panelGrid columns="2">
+	
+		 <h:outputText value="Id_Planing" />
+		<h:inputText value="#{planningBean.p.id_Planing}" />
+		  <h:commandButton action="#{planningBean.updatePlaning()}" value="Update" /> 
+		
+		
+	</h:panelGrid>
+</h:form>
+</html>

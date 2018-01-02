@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form>
+		<h:panelGrid columns="5">
+		 	<h:outputText value="Login" />
+		 	<h:inputText id="inlog" value="#{logBean.login}"  validatorMessage="champ obligatoire">
+		 	 <f:validateRequired></f:validateRequired>
+		 	</h:inputText>
+		 	<h:message for="inlog"  style="color:red" />
+		 	<h:outputText value="Password" />
+		 	<h:inputSecret value="#{logBean.pswd}" />
+		 	<h:commandButton  value="Valider" action="#{logBean.doLogin()}" />
+			<h:outputText value="#{logBean.message}" />
+		</h:panelGrid>
+	</h:form>
+</html>

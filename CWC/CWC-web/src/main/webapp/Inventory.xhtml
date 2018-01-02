@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:p="http://primefaces.org/ui">
+      
+    
+<ui:composition template="/template.xhtml">
+<ui:define name="contenu">
+
+ <h:form >
+	<p:dataTable  value="#{inventoryBean.inventories}"  var="inv"  >
+	<f:facet name="header">List of Inventories</f:facet>
+			<p:column style="width:16px">
+				<p:rowToggler />
+				</p:column>
+	 <p:column headerText="Human Resources">
+				<h:outputLabel value="#{inv.humanResources}" />
+				</p:column>
+     <p:column headerText="Logistical Resources">
+				<h:outputLabel value="#{inv.logisticalResources}" />
+				</p:column>
+	 <p:column headerText="Software Resources">
+				<h:outputLabel value="#{inv.softwareResources}" />
+				</p:column>
+	<p:column>
+    <h:commandButton value="update" >
+    <f:setPropertyActionListener value="#{inv}" target="#{inventoryBean.inventory}"></f:setPropertyActionListener>
+    <f:setPropertyActionListener value="#{true}" target="#{inventoryBean.test}"></f:setPropertyActionListener>
+   </h:commandButton>
+    </p:column>
+   <p:column>
+   <h:commandButton action="#{inventoryBean.delete(inv)}" value="delete" />
+    </p:column>
+	</p:dataTable>
+	<h:commandButton action="#{inventoryBean.inisialiser()}" value="Add" />
+	</h:form>
+      
+      
+      
+      
+
+	<h:form rendered="#{inventoryBean.test}">
+	<p:panelGrid columns="2">
+		
+		<h:outputText value="Human Resources" />
+		<p:inputText id="date" value="#{inventoryBean.inventory.humanResources}"/>
+			
+		<h:outputText value="Logistical Resources:" />
+		<p:inputText value="#{inventoryBean.inventory.logisticalResources}" />
+		<h:outputText value="Software Resources:" />
+		<p:inputText value="#{inventoryBean.inventory.softwareResources}" />  
+		<h:commandButton action="#{inventoryBean.updateInventory()}" value="Validate" /> 
+		<p:message for="date"/>
+		
+	</p:panelGrid>
+</h:form>
+</ui:define>
+</ui:composition>
+</html>

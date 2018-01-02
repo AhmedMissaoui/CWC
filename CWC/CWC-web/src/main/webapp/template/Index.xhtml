@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrought"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+
+<h:head>
+	<meta charset="utf-8"/>
+	<title>Daily UI - Day 1 Sign In</title>
+
+	<!-- Google Fonts -->
+	<h:outputStylesheet library="css" name="stylle3.css"  ></h:outputStylesheet>
+	<!--<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>-->
+
+	<h:outputStylesheet library="css" name="stylle2.css"  ></h:outputStylesheet>
+	<!--<link rel="stylesheet" href="css/animate.css" -->
+	<!-- Custom Stylesheet -->
+	<h:outputStylesheet library="css" name="css2.css"  ></h:outputStylesheet>
+	<!--  <link rel="stylesheet" href="css/style.css"> -->
+<h:outputStylesheet library="js" name="jquery.min.js"  ></h:outputStylesheet>
+</h:head>
+	
+
+<h:body>
+	<div class="container">
+		<div class="top">
+			<h1 id="title" class="hidden"><span id="logo">Welcome <span>UI</span></span></h1>
+		</div>
+		<div class="login-box animated fadeInUp">
+			<div class="box-header">
+				<h2>Log In</h2>
+			</div>
+			<h:form>
+			<label for="username">Username</label>
+			<br/>
+			<h:inputText id="inlog" value="#{logBean.login}"  validatorMessage="champ obligatoire">
+		 	 <f:validateRequired></f:validateRequired>
+		 	</h:inputText>
+		 	<h:message for="inlog"  style="color:red" />
+			<br/>
+			<label for="password">Password</label>
+			<br/>
+			<h:inputSecret  value="#{logBean.pswd}" />
+			<br/>
+		 	<h:commandButton  value="Valider" action="#{logBean.doLogin()}" />
+			<h:outputText value="#{logBean.message}" />
+			
+			<a href="#"><p class="small">Forgot your password?</p></a>
+			</h:form>
+		</div>
+	</div>
+</h:body>
+
+<script>
+	$(document).ready(function () {
+    	$('#logo').addClass('animated fadeInDown');
+    	$("input:text:visible:first").focus();
+	});
+	$('#username').focus(function() {
+		$('label[for="username"]').addClass('selected');
+	});
+	$('#username').blur(function() {
+		$('label[for="username"]').removeClass('selected');
+	});
+	$('#password').focus(function() {
+		$('label[for="password"]').addClass('selected');
+	});
+	$('#password').blur(function() {
+		$('label[for="password"]').removeClass('selected');
+	});
+</script>
+
+</html>

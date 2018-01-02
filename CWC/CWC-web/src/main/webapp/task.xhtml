@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml">
+<ui:define name="contenu">
+	<h:form >
+	
+	<p:dataTable  value="#{taskbean.t_tasks}"  var="task" >
+	<f:facet name="header">List des tasks</f:facet>
+			
+		
+		<p:column style="width:16px">
+			<p:rowToggler />
+		</p:column>
+		
+	<p:column headerText="State">
+			<h:outputLabel value="#{task.state}" />
+		</p:column>
+   
+   <p:column headerText="Workload">
+			<h:outputLabel value="#{task.workload}" />
+		</p:column>
+   
+   <p:column>
+    <h:commandButton value="update" >
+    <f:setPropertyActionListener value="#{task}" target="#{taskbean.t}"></f:setPropertyActionListener>
+    <f:setPropertyActionListener value="#{true}" target="#{taskbean.test}"></f:setPropertyActionListener>
+   </h:commandButton>
+    </p:column>
+   
+	 
+	
+	  <p:column>
+   <h:commandButton action="#{taskbean.deleteTs(task)}" value="delete" />
+    </p:column>
+    
+	</p:dataTable>
+	<h:commandButton action="#{taskbean.inisialiser()}" value="Add" />
+	</h:form>
+	
+   
+
+<h:form  rendered="#{taskbean.test}">
+	<p:panelGrid columns="2" >
+
+	
+	<h:outputText value="workaload"  required="true" requiredMessage="champ obligatoire"/>
+	<p:inputText   value="#{taskbean.t.workload}" />
+	
+	 <h:outputText value="State:"/>
+	 
+    <p:selectOneMenu  value="#{taskbean.t.state}">
+    <f:selectItem  itemValue="to do" itemLabel="to do"/>
+    <f:selectItem  itemValue="doing" itemLabel="doing"/>
+    <f:selectItem  itemValue="Not yet" itemLabel="No yet"/>
+   </p:selectOneMenu>
+	
+	
+    <h:commandButton action="#{taskbean.updateTs()}" value="valider" />
+
+     </p:panelGrid>
+	</h:form>
+	</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+<ui:define name="contenu">
+	<h:inputText value="#{traningSessionBean.tr.id_Training}" />
+	<h:form>
+
+		<p:dataTable value="#{traningSessionBean.employees}" var="employee">
+			<f:facet name="header">List of Employees</f:facet>
+			<p:column style="width:16px">
+				<p:rowToggler />
+			</p:column>
+
+			<p:column headerText="CIN">
+				<h:outputLabel value="#{employee.CIN}" />
+			</p:column>
+
+			<p:column headerText="First name">
+				<h:outputLabel value="#{employee.first_name}" />
+			</p:column>
+
+			<p:column headerText="Last name">
+				<h:outputLabel value="#{employee.last_name}" />
+			</p:column>
+
+			<p:rowExpansion>
+				<p:dataTable value="#{employee.emp_sessions}" var="training">
+					<f:facet name="header">List of sessions</f:facet>
+
+					<p:column headerText="Nom">
+						<h:outputLabel value="#{training.tr_se.session}" />
+					</p:column>
+
+					<p:column headerText="Date">
+						<h:outputLabel value="#{training.tr_se.date}">
+							<f:convertDateTime pattern="yyyy-mm-dd" />
+						</h:outputLabel>
+					</p:column>
+				</p:dataTable>
+			</p:rowExpansion>
+		</p:dataTable>
+	</h:form>
+</ui:define>
+</ui:composition>
+</html>

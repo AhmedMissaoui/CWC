@@ -1,0 +1,116 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="contenu">
+
+		
+		<h:form>
+			<p:dataTable value="#{employementBean.employees}" var="E" >
+				<f:facet name="header">List of employees</f:facet>
+				<p:column style="width:16px">
+				<p:rowToggler />
+					</p:column>
+								
+			<p:column headerText="Number of CIN">
+				<h:outputLabel value="#{E.CIN}" />
+			</p:column>
+			<p:column headerText="First name:">
+				<h:outputLabel value="#{E.first_name}" />
+			</p:column>
+			
+			<p:column headerText="Last name:">
+				<h:outputLabel value="#{E.last_name}" />
+			</p:column>
+			
+			<p:column headerText="Birth Date:">
+				<h:outputLabel value="#{E.birthday}" />
+			</p:column>
+			
+			<p:column headerText="Disponibility:">
+				<h:outputLabel value="#{E.disponipility}" />
+			</p:column>
+			
+			<p:column headerText="Number of schedules:">
+				<h:outputLabel value="	#{E.nb_horaire}" />
+			</p:column>
+			
+			<p:column headerText="Login">
+				<h:outputLabel value="	#{E.login}" />
+			</p:column>
+			
+			<p:column headerText="ID_Team">
+				<h:outputLabel value="	#{E.team.id_Team}" />
+			</p:column>
+			
+				<p:column>
+					<h:commandButton value="Update" >
+						<f:setPropertyActionListener value="#{E}"
+							target="#{employementBean.f}"></f:setPropertyActionListener>
+						<f:setPropertyActionListener value="#{true}"
+							target="#{employementBean.test}"></f:setPropertyActionListener>
+					</h:commandButton>
+				</p:column>
+				
+				<p:column>
+					<h:commandButton action="#{employementBean.deleteEmploye(E)}"
+						value="Delete" />
+				</p:column>
+				
+			</p:dataTable>
+			
+			
+			<h:commandButton action="#{employementBean.initialiser()}"
+				value="Add a new employement" />
+		</h:form>
+		<h:form rendered="#{employementBean.test}">
+			<p:panelGrid columns="2">
+
+				<h:outputLabel value="N° CIN :" />
+				<p:inputText value="#{employementBean.f.CIN}" />
+				
+				<h:outputLabel value="First name :" />
+				<p:inputText value="#{employementBean.f.first_name}" />
+				
+				<h:outputLabel value="Last name :" />
+				<p:inputText value="#{employementBean.f.last_name}" />
+				
+				 <p:outputLabel for="button" value="Date:" />
+        			<p:calendar id="button" value="#{employementBean.f.birthday}" showOn="button" >
+					<!--  <p:calendar id="date" value="#{employementBean.f.birthday}"> -->
+					 
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:calendar>
+					
+					
+				
+				
+				
+				<h:outputLabel value="Disponibility:" />
+				<p:inputText value="#{employementBean.f.disponipility}" />
+				
+				<h:outputLabel value="Nombre d'horaire" />
+				<p:inputText value="#{employementBean.f.nb_horaire}" />
+				
+				<h:outputLabel value="Login" />
+				<p:inputText value="#{employementBean.f.login}" />
+				
+				<p:outputLabel value="Select the employee's team"></p:outputLabel>
+				<p:selectOneMenu value="#{employementBean.teamId}">
+					<f:selectItems value="#{employementBean.TeamList()}" var="item"
+						itemLabel="#{item.category}" itemValue="#{item.id_Team}"></f:selectItems>
+				</p:selectOneMenu>
+				<h:commandButton
+					action="#{employementBean.updateEmploye()}"
+					value="Update" />
+				<h:message for="date" />
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
