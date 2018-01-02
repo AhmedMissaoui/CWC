@@ -15,9 +15,17 @@ It follows this structure:
 3-CWC-web : the Web part of the application that contain (under JavaRessources) precisely the package tn.esprit.cwc.beans the Java beans that each one call methods from the its service from "ejb" to be Managed and used later in UI.
 Under the "Deployed Ressources" , you can fin different UI Files written in XHTML to be used in MVC architecture under the framework JSF.
 
+# Project CWC : Deployment
+1-First you need to make new server (Wildfly 9 or 8 ) and started.
+2- You have to deploy the ejb project but running "Clean install" command in the "Maven Build" option or just click "Run on server"
+3- Check if hibernate generate your schema in Console
+4-If last step is executed rightfully , Run the web project By a "Run on server" option On the Index.xhtml File or a "clean install" command in "Mavel build" option.
+
+# Tools and requirements
 Tools :
 Jboss Developer Studio
-EJB : Entreprise Java Bean
+EJB : Entreprise Java Bean 3
 JDK8
+Wildfly 9.x or 8.x (Application Server)
 JSF : Java server faces
 JPA/Hibernate
